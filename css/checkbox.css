@@ -1,0 +1,101 @@
+
+/* basic css */
+#ss-form input[type=radio]   { display:none; }
+#ss-form input[type=checkbox]   { display:none; }
+#check-awesome      { position:relative; }
+
+/* checkbox css */
+#check-awesome     { margin-top: 10px; margin-left: 60px; }
+#ss-form label              { cursor:pointer; }
+#ss-form label .span        { display:block; position:absolute; left:0;
+  -webkit-transition-duration:2s; -moz-transition-duration:2s; transition-duration:2s;
+}
+#ss-form label .box {
+  top: 0px;
+  left: -40px;
+  font-size: 2px;
+  text-indent: -9999em;
+  border-top: 4px solid #5555ff;
+  border-right: 4px solid #5555ff;
+  border-bottom: 4px solid #5555ff;
+  border-left: 4px solid #5555ff;
+  -webkit-transition:1s; -moz-transition:1s; transition:1s;
+}
+#ss-form .box,
+#ss-form .box:after {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+#ss-form label:hover .box{
+  /*border-top: 4px solid #f70000;
+  border-right: 4px solid #ff8a8a;
+  border-bottom: 4px solid #ff8a8a;
+  border-left: 4px solid #f70000;
+  -webkit-animation: load 0.7s infinite linear;
+  animation: load 0.7s infinite linear;*/
+}
+#ss-form label .check         {
+  top: -5px;
+  left: -36px;
+  width: 12px;
+  height: 24px;
+  border: 2px solid #f70000;
+  border-top: none;
+  border-left: none;
+  opacity:0;
+  z-index:888;
+  -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); transform:rotate(360deg);
+  -webkit-transition:0.8s; -moz-transition:0.8s; transition:0.8s;
+}
+
+/* handling click events */
+
+/* when radio is checked */
+#ss-form input[type=radio]:checked ~ label .box {
+  opacity:0;
+  -webkit-transform   :scale(1.2) rotate(360deg);
+  -moz-transform        :scale(1.2) rotate(360deg);
+  transform                 :scale(1.2) rotate(360deg);
+}
+#ss-form input[type=radio]:checked ~ label .check {
+  opacity:1;
+  -webkit-transform   :scale(1) rotate(45deg);
+  -moz-transform      :scale(1) rotate(45deg);
+  transform           :scale(1) rotate(45deg);
+}
+
+/* when checkbox is checked */
+#ss-form input[type=checkbox]:checked ~ label .box {
+  opacity:0;
+  -webkit-transform   :scale(1.2) rotate(360deg);
+  -moz-transform        :scale(1.2) rotate(360deg);
+  transform                 :scale(1.2) rotate(360deg);
+}
+#ss-form input[type=checkbox]:checked ~ label .check {
+  opacity:1;
+  -webkit-transform   :scale(1) rotate(45deg);
+  -moz-transform      :scale(1) rotate(45deg);
+  transform           :scale(1) rotate(45deg);
+}
+
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

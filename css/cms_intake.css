@@ -1,0 +1,177 @@
+<style>
+	@font-face {
+	font-family: WendyMedium;
+	src: url('../assets/assets_admin/fonts/apple-chancery-1361531421.ttf');
+	}
+
+	div.dataTables_paginate, div.dataTables_info {text-align: center !important}
+	.forComparisonHead{
+		font-size: 15px !important;
+		font-weight: bold !important;
+		text-align:center;
+		border: 1px solid lavenderblush;
+	}
+	.forIntialHead{
+		font-size: 15px !important;
+		font-weight: bold !important;
+		text-align:center;
+		border: 1px solid lavenderblush;
+	}
+	.forComparisonDataTitle{
+		font-size: 15px !important;
+		font-weight: bold !important;
+		border: 1px solid lavenderblush;
+	}
+	.font20px{
+		font-size:20px;
+	}
+	.borderNone{
+		border:none !important;
+	}
+	.borderBottomNone{
+		border-bottom:none !important;
+	}
+	.borderWhiteTRL{
+		    border-top: 1px solid white;
+			border-left: 1px solid white;
+			border-right: 1px solid white;
+	}
+	.borderTopNone{
+		border-top:none !important;
+	}
+	.text-left{
+		text-align: left !important;
+	}
+	/*textarea.forComparison {
+		!min-height:100px;
+		max-width:400px; 
+		min-width:300px;
+		min-height:200px;
+	}*/
+	
+	textarea{
+		resize:vertical;
+	}
+	.row{
+			margin-bottom:10px !important;
+			background:white
+	}
+	.padding25{
+		padding: 25px !important;
+	}
+	.margin-bottom10px{
+		margin-bottom:10px !important
+	}
+	
+	td{
+		vertical-align: top;
+		border: 1px solid #eeeeee !important
+	}
+	
+	#loading-img
+	{
+		background: url(http://preloaders.net/preloaders/360/Velocity.gif) center center no-repeat;
+		height: 100%;
+		z-index: 20;
+	}
+	input{
+		width:100px;
+	}
+	.width60px{
+		width: 60px;
+	}
+	.width100px{
+		width: 100px;
+	}
+	.width150px{
+		width: 150px;
+	}
+	.width300px{
+		width: 200px;
+	}
+	. margin-bottom-0{
+		margin-bottom:0px !important;
+	}
+	.dropdownSize45{
+		width:45px;
+		padding: 5px;
+	}
+	.overlay {
+	background: #e9e9e9;
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.5;
+	}
+	.portlet-body{
+		    background-color: gray !important;
+			padding: 30px !important;
+			margin: 10px !important;
+	}
+	@media only screen and (max-width: 800px) 
+	{
+		textarea
+		{
+			width:100% !important;
+			min-width:0px;
+		}
+		
+		/* Force table to not be like tables anymore */
+		#no-more-tables table, 
+		#no-more-tables thead, 
+		#no-more-tables tbody, 
+		#no-more-tables th, 
+		#no-more-tables td, 
+		#no-more-tables tr
+		{ 
+			display: block;
+			vertical-align: top;
+		}
+	 
+		/* Hide table headers (but not display: none;, for accessibility) */
+		#no-more-tables thead tr
+		{ 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+	 
+		#no-more-tables tr { border: 1px solid #ccc; }
+	 
+		/*#no-more-tables td 
+		{ 
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+			white-space: normal;
+			text-align:left;
+			vertical-align: top;
+		}*/
+	 
+		#no-more-tables td:before 
+		{ 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+			text-align:left;
+			font-weight: bold;
+		}
+		.dropdownSize45
+		{
+			width:100%;
+		}
+		/*
+		Label the data
+		*/
+		#no-more-tables td:before { content: attr(data-title); }
+	}
+	</style>

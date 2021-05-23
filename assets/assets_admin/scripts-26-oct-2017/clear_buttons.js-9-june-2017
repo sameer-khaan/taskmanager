@@ -1,0 +1,59 @@
+jQuery(document).ready(function()
+{
+	$("a").click(function()
+	{
+		_ID		=	$(this).attr('id');
+		
+		$("#"+_ID).parent().find('.popover').find('.editableform').find('.editable-buttons').append('  <button data-id="'+_ID+'" data-field="'+_ID+'" data-value="NULL" type="button" class="btn red eraseData"> Clear </button>');
+	});
+	
+	
+	
+	$(document).on('click', '.eraseData', function(e)
+	{
+		pdf_user_id			=	$("#pdf_user_id").val();
+		data_id				=	$(this).attr('data-id');
+		field				=	$(this).attr('data-field');
+		fieldValue			=	$(this).attr('data-value');
+		
+		$('#'+data_id).editable('setValue','',true);
+		$('.editable-cancel').trigger('click');
+		
+		
+		if(	data_id == 'to1' || 
+			data_id == 'to2' || 
+			data_id == 'to3' || 
+			data_id == 'to4' || 
+			data_id == 'to5' || 
+			data_id == 'to6' || 
+			data_id == 'to7' || 
+			data_id == 'to8'
+			)
+		{
+			postData	=	"pdf_user_id="+pdf_user_id+"&"+field+"="+fieldValue+"&"+data_id+"_current=NULL";
+		}
+		else
+		{
+			postData	=	"pdf_user_id="+pdf_user_id+"&"+field+"="+fieldValue;
+		}
+		
+        console.log(postData);
+        
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        console.log(err.Message);
+					},
+					success: function(response) 
+					{
+						$('#'+data_id).css("color","#6564B0");
+						$('#'+data_id).text('Empty');
+						console.log(response);
+						e.preventDefault();
+					}
+				});
+	});
+});

@@ -1,0 +1,1110 @@
+ jQuery(document).ready(function() {
+	  
+	  //----------------------current/previous employer----------------------------------------//
+	 $("#current_previous_employer_current, #current_previous_employer_previous").change(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		current_previous_employer				=	'';
+
+		if($(this).val() == 'current')
+		{
+			$( "#current_previous_employer_previous" ).parent().parent().removeClass('focus');
+			$( "#current_previous_employer_previous" ).parent().removeClass('checked');
+		}
+	
+		if($(this).val() == 'previous')
+		{
+			$( "#current_previous_employer_current" ).parent().parent().removeClass('focus');
+			$( "#current_previous_employer_current" ).parent().removeClass('checked');
+		}
+		
+		if($(this).parent().attr('class') == 'checked')
+		{
+			current_previous_employer				=	$(this).val();
+			
+			if($('#company1').text().toLowerCase() == 'empty')
+			{
+				$("#company1").addClass('requiredField');
+				$("#company1").next('.requiredError').remove();
+				$("#company1").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+
+            if($('#from4').text().toLowerCase() == 'empty')
+			{
+                $("#from4").addClass('requiredField');
+                $("#from4").next('.requiredError').remove();
+                $("#from4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+            }
+
+            if($('#to4').text().toLowerCase() == 'empty')
+			{
+                $("#to4").addClass('requiredField');
+                $("#to4").next('.requiredError').remove();
+                $("#to4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+            }
+			
+			if($('#add4').text().toLowerCase() == 'empty')
+			{
+				$("#add4").addClass('requiredField');
+				$("#add4").next('.requiredError').remove();
+				$("#add4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#phone4').text().toLowerCase() == 'empty')
+			{
+				$("#phone4").addClass('requiredField');
+				$("#phone4").next('.requiredError').remove();
+				$("#phone4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#position2').text().toLowerCase() == 'empty')
+			{
+				$("#position2").addClass('requiredField');
+				$("#position2").next('.requiredError').remove();
+				$("#position2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#netincome2').text().toLowerCase() == 'empty')
+			{
+				$("#netincome2").addClass('requiredField');
+				$("#netincome2").next('.requiredError').remove();
+				$("#netincome2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&current_previous_employer="+current_previous_employer;
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+		else
+		{
+			$("#company1").removeClass('requiredField');
+			$("#company1").next('.requiredError').remove();
+			$("#company1").text('Empty');
+			
+			$("#from4").removeClass('requiredField');
+			$("#from4").next('.requiredError').remove();
+			$("#from4").text('Empty');
+			
+			$("#to4").removeClass('requiredField');
+			$("#to4").next('.requiredError').remove();
+			$("#to4").text('Empty');
+			
+			$("#add4").removeClass('requiredField');
+			$("#add4").next('.requiredError').remove();
+			$("#add4").text('Empty');
+			
+			$("#phone4").removeClass('requiredField');
+			$("#phone4").next('.requiredError').remove();
+			$("#phone4").text('Empty');
+			
+			$("#position2").removeClass('requiredField');
+			$("#position2").next('.requiredError').remove();
+			$("#position2").text('Empty');
+
+			$("#netincome2").removeClass('requiredField');
+			$("#netincome2").next('.requiredError').remove();
+			$("#netincome2").text('Empty');
+			
+			$("#to4").removeClass('requiredField');
+			$("#to4").next('.requiredError').remove();
+			$("#to4").text('Empty');
+			$("#to4").css('color','red');
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&current_previous_employer="+current_previous_employer+'&company1=&from4=&to4=&to4_current=&add4=&phone4=&position2=&netincome2=';
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+   });
+		   
+   if($('#current_previous_employer_val').length)
+   {
+	   currentpreviousemployer	=	$('#current_previous_employer_val').val();
+	   
+	   if(currentpreviousemployer != '')
+	   {
+		   $("#current_previous_employer_"+currentpreviousemployer).parent().addClass('checked');
+		   $("#company1").addClass('requiredField');
+           $("#from4").addClass('requiredField');
+           $("#to4").addClass('requiredField');
+		   $("#add4").addClass('requiredField');
+		   $("#phone4").addClass('requiredField');
+		   $("#position2").addClass('requiredField');
+		   $("#netincome2").addClass('requiredField');
+	   }
+   }
+   
+   //----------------------current/previous employer----------------------------------------//
+   
+	//----------------------co-applicant/co-signer check-uncheck----------------------------------------//
+	 $("#co_applicant_signer_applicant, #co_applicant_signer_signer").change(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		co_applicant_signer				=	'';
+
+		if($(this).val() == 'applicant')
+		{
+			$( "#co_applicant_signer_signer" ).parent().parent().removeClass('focus');
+			$( "#co_applicant_signer_signer" ).parent().removeClass('checked');
+			
+			//$( "#co_applicant_signer_applicant" ).parent().addClass('checked');
+		}
+	
+		if($(this).val() == 'signer')
+		{
+			$( "#co_applicant_signer_applicant" ).parent().parent().removeClass('focus');
+			$( "#co_applicant_signer_applicant" ).parent().removeClass('checked');
+			//$( "#co_applicant_signer_signer" ).parent().addClass('checked');
+		}
+		
+		if($(this).parent().attr('class') == 'checked')
+		{
+			co_applicant_signer				=	$(this).val();
+			
+			
+			if($('#username2').text().toLowerCase() == 'empty')
+			{
+				$("#username2").addClass('requiredField');
+				$("#username2").next('.requiredError').remove();
+				$("#username2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#dob2').text().toLowerCase() == 'empty')
+			{
+				$("#dob2").addClass('requiredField');
+				$("#dob2").next('.requiredError').remove();
+				$("#dob2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#ssn2').text().toLowerCase() == 'empty')
+			{
+				$("#ssn2").addClass('requiredField');
+				$("#ssn2").next('.requiredError').remove();
+				$("#ssn2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#add5').text().toLowerCase() == 'empty')
+			{
+				$("#add5").addClass('requiredField');
+				$("#add5").next('.requiredError').remove();
+				$("#add5").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			/*if($('#coApplicantSign1').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign1").addClass('requiredField');
+				$("#coApplicantSign1").next('.requiredError').remove();
+				$("#coApplicantSign1").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#coApplicantSign2').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign2").addClass('requiredField');
+				$("#coApplicantSign2").next('.requiredError').remove();
+				$("#coApplicantSign2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}*/
+			
+			if($('#coApplicantSign3').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign3").addClass('requiredField');
+				$("#coApplicantSign3").next('.requiredError').remove();
+				$("#coApplicantSign3").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			/*if($('#coApplicantSign4').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign4").addClass('requiredField');
+				$("#coApplicantSign4").next('.requiredError').remove();
+				$("#coApplicantSign4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}*/
+			
+			if($('#coApplicantSign5').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign5").addClass('requiredField');
+				$("#coApplicantSign5").next('.requiredError').remove();
+				$("#coApplicantSign5").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			/*if($('#coApplicantSign6').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign6").addClass('requiredField');
+				$("#coApplicantSign6").next('.requiredError').remove();
+				$("#coApplicantSign6").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#coApplicantSign7').text().toLowerCase() == 'empty')
+			{
+				$("#coApplicantSign7").addClass('requiredField');
+				$("#coApplicantSign7").next('.requiredError').remove();
+				$("#coApplicantSign7").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}*/
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&co_applicant_signer="+co_applicant_signer;
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+		else
+		{
+			$("#username2").removeClass('requiredField');
+			$("#username2").next('.requiredError').remove();
+			$("#username2").text('Empty');
+			
+			$("#dob2").removeClass('requiredField');
+			$("#dob2").next('.requiredError').remove();
+			$("#dob2").text('Empty');
+			
+			$("#ssn2").removeClass('requiredField');
+			$("#ssn2").next('.requiredError').remove();
+			$("#ssn2").text('Empty');
+			
+			$("#add5").removeClass('requiredField');
+			$("#add5").next('.requiredError').remove();
+			$("#add5").text('Empty');
+			
+			$("#coApplicantSign1").removeClass('requiredField');
+			$("#coApplicantSign1").next('.requiredError').remove();
+			$("#coApplicantSign1").text('Empty');
+			
+			$("#coApplicantSign2").removeClass('requiredField');
+			$("#coApplicantSign2").next('.requiredError').remove();
+			$("#coApplicantSign2").text('Empty');
+
+			$("#coApplicantSign3").removeClass('requiredField');
+			$("#coApplicantSign3").next('.requiredError').remove();
+			$("#coApplicantSign3").text('Empty');
+			
+			$("#coApplicantSign4").removeClass('requiredField');
+			$("#coApplicantSign4").next('.requiredError').remove();
+			$("#coApplicantSign4").text('Empty');
+			
+			$("#coApplicantSign5").removeClass('requiredField');
+			$("#coApplicantSign5").next('.requiredError').remove();
+			$("#coApplicantSign5").text('Empty');
+			
+			$("#coApplicantSign6").removeClass('requiredField');
+			$("#coApplicantSign6").next('.requiredError').remove();
+			$("#coApplicantSign6").text('Empty');
+			
+			$("#coApplicantSign7").removeClass('requiredField');
+			$("#coApplicantSign7").next('.requiredError').remove();
+			$("#coApplicantSign7").text('Empty');
+			
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&co_applicant_signer="+co_applicant_signer+'&username2=&ssn2=&add5=&coApplicantSign1=&coApplicantSign2=&coApplicantSign3=&coApplicantSign4=&coApplicantSign5=&coApplicantSign6=&coApplicantSign7=';
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+   });
+		   
+   if($('#co_applicant_signer_val').length)
+   {
+	   coapplicantsigner	=	$('#co_applicant_signer_val').val();
+	   
+	   if(coapplicantsigner != '')
+	   {
+		   $("#co_applicant_signer_"+coapplicantsigner).parent().addClass('checked');
+		   $("#username2").addClass('requiredField');
+		   $("#dob2").addClass('requiredField');
+		   $("#ssn2").addClass('requiredField');
+		   $("#add5").addClass('requiredField');
+		   $("#coApplicantSign1").addClass('requiredField');
+		   $("#coApplicantSign2").addClass('requiredField');
+		   $("#coApplicantSign3").addClass('requiredField');
+		   $("#coApplicantSign4").addClass('requiredField');
+		   $("#coApplicantSign5").addClass('requiredField');
+		   $("#coApplicantSign6").addClass('requiredField');
+		   $("#coApplicantSign7").addClass('requiredField');
+	   }
+   }
+   
+   //----------------------co-applicant/co-signer check-uncheck----------------------------------------//
+   
+	 
+	 //----------------------current/previous employer2----------------------------------------//
+	 $("#current_previous_employer2_current, #current_previous_employer2_previous").change(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		current_previous_employer2				=	'';
+
+		if($(this).val() == 'current')
+		{
+			$( "#current_previous_employer2_previous" ).parent().parent().removeClass('focus');
+			$( "#current_previous_employer2_previous" ).parent().removeClass('checked');
+		}
+	
+		if($(this).val() == 'previous')
+		{
+			$( "#current_previous_employer2_current" ).parent().parent().removeClass('focus');
+			$( "#current_previous_employer2_current" ).parent().removeClass('checked');
+		}
+		
+		if($(this).parent().attr('class') == 'checked')
+		{
+			current_previous_employer2				=	$(this).val();
+			
+			if($('#company2').text().toLowerCase() == 'empty')
+			{
+				$("#company2").addClass('requiredField');
+				$("#company2").next('.requiredError').remove();
+				$("#company2").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+            if($('#from8').text().toLowerCase() == 'empty')
+			{
+                $("#from8").addClass('requiredField');
+                $("#from8").next('.requiredError').remove();
+                $("#from8").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+            }
+
+            if($('#to8').text().toLowerCase() == 'empty')
+			{
+                $("#to8").addClass('requiredField');
+                $("#to8").next('.requiredError').remove();
+                $("#to8").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+            }
+			
+			if($('#add8').text().toLowerCase() == 'empty')
+			{
+				$("#add8").addClass('requiredField');
+				$("#add8").next('.requiredError').remove();
+				$("#add8").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#phone8').text().toLowerCase() == 'empty')
+			{
+				$("#phone8").addClass('requiredField');
+				$("#phone8").next('.requiredError').remove();
+				$("#phone8").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#position4').text().toLowerCase() == 'empty')
+			{
+				$("#position4").addClass('requiredField');
+				$("#position4").next('.requiredError').remove();
+				$("#position4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			if($('#netincome4').text().toLowerCase() == 'empty')
+			{
+				$("#netincome4").addClass('requiredField');
+				$("#netincome4").next('.requiredError').remove();
+				$("#netincome4").after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+			}
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&current_previous_employer2="+current_previous_employer2;
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+		else
+		{
+			$("#company2").removeClass('requiredField');
+			$("#company2").next('.requiredError').remove();
+			$("#company2").text('Empty');
+			
+			$("#from8").removeClass('requiredField');
+			$("#from8").next('.requiredError').remove();
+			$("#from8").text('Empty');
+			
+			$("#to8").removeClass('requiredField');
+			$("#to8").next('.requiredError').remove();
+			$("#to8").text('Empty');
+			
+			$("#add8").removeClass('requiredField');
+			$("#add8").next('.requiredError').remove();
+			$("#add8").text('Empty');
+			
+			$("#phone8").removeClass('requiredField');
+			$("#phone8").next('.requiredError').remove();
+			$("#phone8").text('Empty');
+			
+			$("#position4").removeClass('requiredField');
+			$("#position4").next('.requiredError').remove();
+			$("#position4").text('Empty');
+
+			$("#netincome4").removeClass('requiredField');
+			$("#netincome4").next('.requiredError').remove();
+			$("#netincome4").text('Empty');
+			
+			$("#to8").removeClass('requiredField');
+			$("#to8").next('.requiredError').remove();
+			$("#to8").text('Empty');
+			$("#to8").css('color','red');
+			
+			postData	=	"pdf_user_id="+pdf_user_id+"&current_previous_employer2="+current_previous_employer2+'&company2=&from8=&to8=&to8_current=&add8=&phone8=&position4=&netincome4=';
+
+			$.ajax({
+						url: "post.php",
+						data: postData,
+						type: 'post',
+						error: function(xhr, status, error) {
+						  var err = eval("(" + xhr.responseText + ")");
+						  //alert(err.Message);
+						},
+						success: function(response) 
+						{
+						}
+					});
+		}
+   });
+		   
+   if($('#current_previous_employer2_val').length)
+   {
+	   currentpreviousemployer2val	=	$('#current_previous_employer2_val').val();
+	   
+	   if(currentpreviousemployer2val != '')
+	   {
+		   $("#current_previous_employer2_"+currentpreviousemployer2val).parent().addClass('checked');
+		   $("#company2").addClass('requiredField');
+           $("#from8").addClass('requiredField');
+           $("#to8").addClass('requiredField');
+		   $("#add8").addClass('requiredField');
+		   $("#phone8").addClass('requiredField');
+		   $("#position4").addClass('requiredField');
+		   $("#netincome4").addClass('requiredField');
+	   }
+   }
+   
+   //----------------------current/previous employer2----------------------------------------//
+   
+	 $(".condition10").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition10						=	$(this).val();
+		textValue						=	$(this).parent().parent().parent().text();
+		
+		$('#cond14text').html(textValue);
+		
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition10="+condition10;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition10_val').length)
+   {
+	   con10	=	$('#condition10_val').val();
+	   
+	   $("#condition10_"+con10).parent().addClass('checked');
+   }
+	 
+	 
+	 
+	 
+	 
+	$(".condition13").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition13						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition13="+condition13;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition13_val').length)
+   {
+	   con13	=	$('#condition13_val').val();
+	   
+	   $("#condition13_"+con13).parent().addClass('checked');
+   }
+   
+   $(".condition14").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition14						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition14="+condition14;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition14_val').length)
+   {
+	   con14	=	$('#condition14_val').val();
+	   
+	   $("#condition14_"+con14).parent().addClass('checked');
+   }
+   
+   $(".condition15").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition15						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition15="+condition15;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition15_val').length)
+   {
+	   con15	=	$('#condition15_val').val();
+	   
+	   $("#condition15_"+con15).parent().addClass('checked');
+   }
+   
+    $(".condition16").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition16						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition16="+condition16;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition16_val').length)
+   {
+	   con16	=	$('#condition16_val').val();
+	   
+	   $("#condition16_"+con16).parent().addClass('checked');
+   }
+   
+    $(".condition17").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition17						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition17="+condition17;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition17_val').length)
+   {
+	   con17	=	$('#condition17_val').val();
+	   
+	   $("#condition17_"+con17).parent().addClass('checked');
+   }
+   
+   $(".condition18").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		condition18						=	$(this).val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&condition18="+condition18;
+
+		$.ajax({
+					url: "post.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#condition18_val').length)
+   {
+	   con18	=	$('#condition18_val').val();
+	   
+	   $("#condition18_"+con18).parent().addClass('checked');
+   }
+   
+    $(".employer_emp_cont").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		employer_emp_cont				=	$(this).val();
+		verificationId	=	$("#verificationId").val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&employer_emp_cont="+employer_emp_cont+"&verificationId="+verificationId;
+
+		$.ajax({
+					url: "post_employer.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#employer_emp_cont_val').length)
+   {
+	   employerempcont	=	$('#employer_emp_cont_val').val();
+	   
+	   $("#employer_emp_"+employerempcont).parent().addClass('checked');
+   }
+   
+	$(".employer_full_part_time").click(function(e){
+		pdf_user_id						=	$("#pdf_user_id").val();
+		employer_full_part_time			=	$(this).val();
+		verificationId	=	$("#verificationId").val();
+		
+		postData	=	"pdf_user_id="+pdf_user_id+"&employer_full_part_time="+employer_full_part_time+"&verificationId="+verificationId;
+
+		$.ajax({
+					url: "post_employer.php",
+					data: postData,
+					type: 'post',
+					error: function(xhr, status, error) {
+					  var err = eval("(" + xhr.responseText + ")");
+					  //alert(err.Message);
+					},
+					success: function(response) 
+					{
+						//alert(response+'hh');
+						console.log(response);
+					}
+				});
+   });
+		   
+   if($('#employer_full_part_time_val').length)
+   {
+	   employerfullparttime	=	$('#employer_full_part_time_val').val();
+	   
+	   $("#employer_full_part_"+employerfullparttime).parent().addClass('checked');
+   }
+   
+   $('#applicant_form_submit').click(function(){
+	   updatePdfFastTrackFields();
+	   var flag	= '1';
+	   
+	   //-----------------check co-applicant co-signer------------------------//
+		 u2		=	$('#username2').text().toLowerCase();
+		 db2	=	$('#dob2').text().toLowerCase();
+		 sn2	=	$('#ssn2').text().toLowerCase();
+		 ad5		=	$('#add5').text().toLowerCase();
+		 
+		 if(u2 != 'empty' || db2 != 'empty' || sn2 != 'empty' || db2 != 'empty')
+		 {
+			 
+		//	$(".co_applicant_signer").each(function() 
+		//	{
+				if($( ".co_applicant_signer" ).parent().hasClass('checked'))
+				{
+					$('.co_applicant_signerRadios').next('.requiredError').remove();
+					//return false;
+				}
+				else
+				{
+					console.log($( this ).attr('id'));
+					flag	= '0';
+					$('.co_applicant_signerRadios').next('.requiredError').remove();
+					$('.co_applicant_signerRadios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+					 //return false;
+				}
+			//}); 
+		 }
+		 
+		
+		//-----------------check co-applicant co-signer------------------------//
+
+		
+		$( ".requiredField" ).each(function() 
+						{
+							
+							if($( this ).text() == 'Empty' || $( this ).text() == 'empty' || $( this ).text() == 'Initials' || $( this ).text() == 'initials')
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$(this).next().next('.requiredError').remove();
+								$(this).next().remove();
+								$(this).after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+							else
+							{
+								$(this).next().next('.requiredError').remove();
+								$(this).next().remove();
+							}
+						});
+						
+		$( ".condition10" ).each(function() 
+						{
+							if($(".condition10").parent().hasClass('checked'))
+							{
+								$('.condition10Radios').next().next('.requiredError').remove();
+								$('.condition10Radios').next().remove();
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition10Radios').next().next('.requiredError').remove();
+								$('.condition10Radios').next().remove();
+								$('.condition10Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						});
+			//alert('5');			
+		
+		//$( ".condition13" ).each(function() 
+						//{
+							if($(".condition13").parent().hasClass('checked'))
+							{
+								if($(".condition13").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition13Radios').next().next('.requiredError').remove();
+									$('.condition13Radios').next().remove();
+									$('.condition13Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{
+									$('.condition13Radios').next().next('.requiredError').remove();
+									$('.condition13Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition13Radios').next().next('.requiredError').remove();
+								$('.condition13Radios').next().remove();
+								$('.condition13Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						//});
+		//$( ".condition14" ).each(function() 
+			//			{
+							if($(".condition14").parent().hasClass('checked'))
+							{
+								if($(".condition14").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition14Radios').next().next('.requiredError').remove();
+									$('.condition14Radios').next().remove();
+									$('.condition14Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{	
+									$('.condition14Radios').next().next('.requiredError').remove();
+									$('.condition14Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition14Radios').next().next('.requiredError').remove();
+								$('.condition14Radios').next().remove();
+								$('.condition14Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+				//		});
+		//$( ".condition15" ).each(function() 
+						//{
+							if($(".condition15").parent().hasClass('checked'))
+							{
+								if($(".condition15").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition15Radios').next().next('.requiredError').remove();
+									$('.condition15Radios').next().remove();
+									$('.condition15Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{
+									$('.condition15Radios').next().next('.requiredError').remove();
+									$('.condition15Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition15Radios').next().next('.requiredError').remove();
+								$('.condition15Radios').next().remove();
+								$('.condition15Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						//});
+		//$( ".condition16" ).each(function() 
+						//{
+							if($(".condition16").parent().hasClass('checked'))
+							{
+								if($(".condition16").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition16Radios').next().next('.requiredError').remove();
+									$('.condition16Radios').next().remove();
+									$('.condition16Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{
+									$('.condition16Radios').next().next('.requiredError').remove();
+									$('.condition16Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition16Radios').next().next('.requiredError').remove();
+								$('.condition16Radios').next().remove();
+								$('.condition16Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						//});
+		//$( ".condition17" ).each(function() 
+						//{
+							if($(".condition17").parent().hasClass('checked'))
+							{
+								if($(".condition17").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition17Radios').next().next('.requiredError').remove();
+									$('.condition17Radios').next().remove();
+									$('.condition17Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{
+									$('.condition17Radios').next().next('.requiredError').remove();
+									$('.condition17Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition17Radios').next().next('.requiredError').remove();
+								$('.condition17Radios').next().remove();
+								$('.condition17Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						//});
+						
+		//$( ".condition18" ).each(function() 
+						//{
+							if($(".condition18").parent().hasClass('checked'))
+							{
+								if($(".condition18").parents('.checked').children().val() == 'no')
+								{
+									console.log($( this ).attr('id'));
+									flag	= '0';
+									$('.condition18Radios').next().next('.requiredError').remove();
+									$('.condition18Radios').next().remove();
+									$('.condition18Radios').after( "  <span class='requiredError' style='color:red'>By selecting 'No' you indicate you do not agree with these terms of service and for this reason your application cannot be accepted. For help completing this form, send us an email to tenxservice@gmail.com.</span>" );
+								}
+								else
+								{
+									$('.condition18Radios').next().next('.requiredError').remove();
+									$('.condition18Radios').next().remove();
+								}
+							}
+							else
+							{
+								console.log($( this ).attr('id'));
+								flag	= '0';
+								$('.condition18Radios').next().next('.requiredError').remove();
+								$('.condition18Radios').next().remove();
+								$('.condition18Radios').after( "  <span class='requiredError' style='color:red'>This field is required</span>" );
+							}
+						//});
+						
+		if(flag == 1)
+		{
+			$('#form-error-alert').css('display','none');
+			$(this).parents('form:first').submit();
+		}
+		else
+		{
+			$('#form-error-alert').css('display','block');
+		}
+   });
+});
+
+
+function updatePdfFastTrackFields()
+{
+	pdf_user_id			=	$("#pdf_user_id").val();
+	r_bedrooms			=	$('#r_bedrooms').text();
+	r_people			=	$('#r_people').text();
+	r_rent				=	$('#r_rent').text();
+	r_chicago			=	$('#r_chicago').text();
+	r_suburbs			=	$('#r_suburbs').text();
+	r_cat				=	$('#r_cat').text();
+	r_dog				=	$('#r_dog').text();
+	r_if_dog			=	$('#r_if_dog').text();
+	r_text1				=	$('#r_text1').text();
+	r_text2				=	$('#r_text2').text();
+	
+	if(r_bedrooms == '' || r_bedrooms == 'empty' || r_bedrooms == 'Empty')
+	{
+		r_bedrooms	=	'';
+	}
+	if(r_people == '' || r_people == 'empty' || r_people == 'Empty')
+	{
+		r_people	=	'';
+	}
+	if(r_rent == '' || r_rent == 'empty' || r_rent == 'Empty')
+	{
+		r_rent	=	'';
+	}
+	if(r_chicago == '' || r_chicago == 'empty' || r_chicago == 'Empty' || r_chicago == 'not selected')
+	{
+		r_chicago	=	'';
+	}
+	if(r_suburbs == '' || r_suburbs == 'empty' || r_suburbs == 'Empty' || r_suburbs == 'not selected')
+	{
+		r_suburbs	=	'';
+	}
+	if(r_cat == '' || r_cat == 'empty' || r_cat == 'Empty' || r_cat == 'not selected')
+	{
+		r_cat	=	'';
+	}
+	if(r_dog == '' || r_dog == 'empty' || r_dog == 'Empty' || r_dog == 'not selected')
+	{
+		r_dog	=	'';
+	}
+	if(r_if_dog == '' || r_if_dog == 'empty' || r_if_dog == 'Empty' || r_if_dog == 'not selected')
+	{
+		r_if_dog	=	'';
+	}
+	if(r_text1 == '' || r_text1 == 'empty' || r_text1 == 'Empty' || r_text1 == 'not selected')
+	{
+		r_text1	=	'';
+	}
+	if(r_text2 == '' || r_text2 == 'empty' || r_text2 == 'Empty' || r_text2 == 'not selected')
+	{
+		r_text2	=	'';
+	}
+	
+	postData	=	"pdf_user_id="+pdf_user_id+"&r_bedrooms="+r_bedrooms+"&r_people="+r_people+"&r_rent="+r_rent+"&r_chicago="+r_chicago+"&r_suburbs="+r_suburbs+"&r_cat="+r_cat+"&r_dog="+r_dog+"&r_if_dog="+r_if_dog+"&r_text1="+r_text1+"&r_text2="+r_text2;
+
+	$.ajax({
+				url: "post.php",
+				data: postData,
+				type: 'post',
+				error: function(xhr, status, error) {
+				  var err = eval("(" + xhr.responseText + ")");
+				  //alert(err.Message);
+				},
+				success: function(response) 
+				{
+					//alert(response+'hh');
+					console.log(response);
+				}
+			});
+}

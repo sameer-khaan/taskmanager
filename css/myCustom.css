@@ -1,0 +1,36 @@
+.clearfix{
+    clear: both;
+}
+.commet-user-img {
+    width: 70px;
+    border-radius: 50px;
+}
+#scroll-bar{
+    max-height: 500px !important;
+    overflow-y: scroll;
+}
+#scroll-bar::-webkit-scrollbar{
+    background-color: #FFFFFF;
+    width: 10px;
+}
+#scroll-bar::-webkit-scrollbar-thumb{
+    background-color: #1651ad;
+    border-radius: 10px;
+
+}
+.post-area{
+    display: block;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    padding: 16px;
+}
+.search-margin{
+    margin-bottom: 0px !important;
+    margin-top: 20px !important;
+}
+.Hide{
+    display: none;
+}
+.Cus-btn{
+    font-size: 15px;
+}
